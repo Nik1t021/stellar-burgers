@@ -1,4 +1,40 @@
-# Стартер на TypeScript для проекта Stellar Burger
+# Stellar Burgers
+
+Учебный проект на React, TypeScript, Redux Toolkit и React Router.
+
+## Запуск 
+
+```sh
+npm ci
+npm start
+```
+
+Открыть http://localhost:4000. В корневом `.env` должна быть строка:
+
+```env 
+BURGER_API_URL=https://norma.ffapi.ru/api
+```
+
+В скачиваемом архиве `.env` уже есть; в Git он исключен через `.gitignore`.
+
+## Проверки 
+
+```sh
+npm run check
+npx tsc --noEmit -p tsconfig.app.json
+npm test -- --runInBand
+npm run build
+```
+
+Для браузерного теста с имитацией API:
+
+```sh
+npx playwright install chromium
+npx run e2e
+```
+
+В приложении доступны конструктор, лента, регистрация, вход,
+восстановление парооля, профиль и история заказов. Лента и история  
 
 ## Процедура создания коммита с проверками
 
