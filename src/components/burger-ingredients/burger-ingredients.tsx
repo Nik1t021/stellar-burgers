@@ -1,6 +1,14 @@
-import { BurgerIngredientsUI } from '@ui';
+import { BurgerIngredientUI, Preloader } from '@ui';
 import { useMemo, useState, useRef, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+
+import {
+  selectIngredients,
+  selectIngredientsError,
+  selectIngredientsStatus,
+} from '@services/selectors/ingredients';
+import { fetchIngredients } from '@services/slices/ingredientsSlice';
+import { useDispatch, useSelector } from '@services/store';
 
 import type { TIngredient, TTabMode } from '@utils-types';
 
@@ -9,8 +17,10 @@ export const BurgerIngredients = (): React.JSX.Element => {
   const titleBunRef = useRef<HTMLHeadingElement>(null);
   const titleMainRef = useRef<HTMLHeadingElement>(null);
   const titleSaucesRef = useRef<HTMLHeadingElement>(null);
-  // TODO: Взять ингредиенты из стора
-  const ingredients: TIngredient[] = [];
+  const dispatch = useDispatch();
+  const ingredients = useSelector(selectIngredients);
+  const status = useSelector(selectIngredientsStatus);
+  const error = useSelector(selectIngredientsError);
 
   const [bunsRef, inViewBuns] = useInView({
     threshold: 0,
@@ -56,6 +66,28 @@ export const BurgerIngredients = (): React.JSX.Element => {
     [ingredients]
   );
 
+  if (status === 'idle' || status === 'loading') return <Preloader />;
+
+  if (status === 'failed') {
+    return (
+      <div role="alert">
+        <p className="text text_type_main-default">{error}</p>
+        <button 
+        type="button"
+        onClick={() => {
+          void dispatch(fetchIngredients());
+        }}
+      >
+        Повторить загрузку
+      </button>
+      </div>
+    );
+  }
+
+  if (!ingredients.length) {
+    return <p className="text text_type_main-default">Нет игредиентов</p>;
+  }
+  
   return (
     <BurgerIngredientsUI
       currentTab={currentTab}
