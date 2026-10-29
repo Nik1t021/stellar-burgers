@@ -3,5 +3,6 @@ import type { Dispatch, SetStateAction } from 'react';
 
 export type LoginUIProps = PageUIProps & {
   password: string;
+  isLoading?: boolean;
   setPassword: Dispatch<SetStateAction<string>>;
 };
