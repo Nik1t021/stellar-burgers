@@ -93,7 +93,7 @@ const App = (): React.JSX.Element => {
           <Route
           path="/ingredients/:id"
           element={
-            <Modal title="Детали ингридиента" onClose={closeModal}>
+            <Modal title="Детали ингредиента" onClose={closeModal}>
               <IngredientDetails />
             </Modal>
           }
