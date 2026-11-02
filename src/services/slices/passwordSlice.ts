@@ -1,5 +1,5 @@
 import { forgotPasswordApi, resetPasswordApi } from "@api";
-import { createAsynkThunk, createSlice, isAnyof } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 const initialState= { isLoading: false, error: null as string | null };
 export const requestPasswordReset = createAsyncThunk(
