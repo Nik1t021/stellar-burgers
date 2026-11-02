@@ -38,7 +38,7 @@ export const ResetPassword = (): React.JSX.Element => {
 
   return (
     <ResetPasswordUI
-      errorText={error ?? uderfined}
+      errorText={error ?? undefined}
       isLoading={isLoading}
       password={password}
       token={token}

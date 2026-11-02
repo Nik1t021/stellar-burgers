@@ -15,7 +15,7 @@ export const AppHeaderUI = ({ userName }: TAppHeaderUIProps): React.JSX.Element 
   const constructorMatch = useMatch('/');
   const ingredientMatch = useMatch('/ingredients/:id');
   const isConstructor = Boolean(constructorMatch ?? ingredientMatch);
-  const isFeed = Boolean(useMatch('/feeed/*'));
+  const isFeed = Boolean(useMatch('/feed/*'));
   const isProfile = Boolean(useMatch('/profile/*'));
 
   return (
@@ -25,7 +25,7 @@ export const AppHeaderUI = ({ userName }: TAppHeaderUIProps): React.JSX.Element 
           <Link
             to="/"
             className={clsx(styles.link, { [styles.link_active]: isConstructor })}
-            aria-current={isConstructor ? 'page' : underfined}
+            aria-current={isConstructor ? 'page' : undefined}
           >
             <BurgerIcon type={isConstructor ? 'primary' : 'secondary'} />
             <p className="text text_type_main-default ml-2 mr-10">Конструктор</p>
@@ -49,7 +49,7 @@ export const AppHeaderUI = ({ userName }: TAppHeaderUIProps): React.JSX.Element 
         >
           <ProfileIcon type={isProfile ? 'primary' : 'secondary'} />
           <p className="text text_type_main-default ml-2">
-            {userName ?? 'Дичный кабинет'}
+            {userName ?? 'Личный кабинет'}
           </p>
         </NavLink>
       </nav>

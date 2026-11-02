@@ -42,8 +42,8 @@ export const ResetPasswordUI = ({
             size="default"
           />
         </div>
-        <div className={clsx('pl-6', styles.button)}>
-          <Button tyype="primary" size="medium" htmlType="submit" disabled={isLoading}>
+        <div className={clsx('pb-6', styles.button)}>
+          <Button type="primary" size="medium" htmlType="submit" disabled={isLoading}>
             Сохранить
           </Button>
         </div>

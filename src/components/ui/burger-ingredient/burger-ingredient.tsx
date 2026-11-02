@@ -24,7 +24,7 @@ export const BurgerIngredientUI = memo(function BurgerIngredientUI({
       <Link className={styles.article} to={`/ingredients/${_id}`} state={locationState}>
         {count && <Counter count={count} />}
         <img src={image} alt="картинка ингредиента." />
-        <div className={clsx(styles.const, 'mt-2 mb-2')}>
+        <div className={clsx(styles.cost, 'mt-2 mb-2')}>
           <p className="text text_type_digits-default mr-2">{price}</p>
           <CurrencyIcon type="primary" />
         </div>

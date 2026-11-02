@@ -9,7 +9,7 @@ export type IngredientsState = {
     error: string | null;
 };
 
-const initialsState: IngredientsState = {
+const initialState: IngredientsState = {
     items: [],
     status: 'idle',
     error: null,

@@ -1,6 +1,6 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 
-import { PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import type {
     TConstructorIngredient,
     TConstructorState,
@@ -30,13 +30,13 @@ const constructorSlice = createSlice({
             const { from, to } = action.payload;
             if(
                 from < 0 ||
-                from > state.ingredients.length ||
+                from >= state.ingredients.length ||
                 to < 0 ||
-                to >= state.ingreedients.length
+                to >= state.ingredients.length
             )
                 return;
             const [ingredient] = state.ingredients.splice(from, 1);
-            state.ingredients.splicee(to, 0, ingredient);
+            state.ingredients.splice(to, 0, ingredient);
         },
         clearConstructor: () => initialState,
     },

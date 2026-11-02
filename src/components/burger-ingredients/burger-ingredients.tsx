@@ -1,4 +1,4 @@
-import { BurgerIngredientUI, Preloader } from '@ui';
+import { BurgerIngredientsUI, Preloader } from '@ui';
 import { useMemo, useState, useRef, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -85,7 +85,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
   }
 
   if (!ingredients.length) {
-    return <p className="text text_type_main-default">Нет игредиентов</p>;
+    return <p className="text text_type_main-default">Нет ингредиентов</p>;
   }
   
   return (

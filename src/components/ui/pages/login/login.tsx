@@ -44,7 +44,7 @@ export const LoginUI = ({
             />
           </div>
           <div className={clsx('pb-6', styles.button)}>
-            <Button type="primary" sixe="medium" htmlType="submit" disabled={isLoading}>
+            <Button type="primary" size="medium" htmlType="submit" disabled={isLoading}>
               Войти
             </Button>
           </div>

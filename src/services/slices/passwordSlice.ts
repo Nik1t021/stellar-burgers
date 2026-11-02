@@ -1,15 +1,15 @@
 import { forgotPasswordApi, resetPasswordApi } from "@api";
 import { createAsynkThunk, createSlice, isAnyof } from '@reduxjs/toolkit';
 
-const iniialSatte= { isLoading: false, error: null as string | null };
-export const requestPasswordReset = createAsynkThunk(
+const initialState= { isLoading: false, error: null as string | null };
+export const requestPasswordReset = createAsyncThunk(
     'password/request',
-    async (ElementInternals: string) => {
-        await forgotPasswordApi({ email });
-        localStorage.setItem('resetPassword', 'true');
+    async (email: string) => {
+  await forgotPasswordApi({ email });
+  localStorage.setItem('resetPassword', 'true');
     }
 );
-export const resetPassword = createAsynkThunk(
+export const resetPassword = createAsyncThunk(
     'password/reset',
     async (values: { password: string; token: string }) => {
         await resetPasswordApi(values);
@@ -27,20 +27,20 @@ const passwordSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addMatcher(
-                isAnyof(requestPasswordReset.pending, resetPassword.pending),
+                isAnyOf(requestPasswordReset.pending, resetPassword.pending),
                 (state) => {
                     state.isLoading = true;
                     state.error = null;
                 }
             )
-            .addMattcher(
-                isAnyof(requestPasswordReset.fulfilled, resetPassword.fulfilled),
+            .addMatcher(
+                isAnyOf(requestPasswordReset.fulfilled, resetPassword.fulfilled),
                 (state) => {
                     state.isLoading = false;
                 }
             )
             .addMatcher(
-                isAnyof(requestPasswordReset.reject, resetPassword.reject),
+                isAnyOf(requestPasswordReset.rejected, resetPassword.rejected),
                 (state, action) => {
                     state.isLoading = false;
                     state.error = action.error.message ?? 'Не удалось выполнить запрос';

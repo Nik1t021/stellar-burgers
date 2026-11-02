@@ -1,5 +1,5 @@
 import { ForgotPasswordUI } from '@ui-pages';
-import { UserState, useEffect, type SyntheticEvent } from 'react';
+import { useState, useEffect, type SyntheticEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { selectPassword } from '@/services/selectors';
@@ -22,7 +22,7 @@ export const ForgotPassword = (): React.JSX.Element => {
   const handleSubmit = (e: SyntheticEvent): void => {
     e.preventDefault();
 
-    is (isLoading) return;
+    if (isLoading) return;
     void dispatch(requestPasswordReset(email))
       .unwrap()
       .then(() => {

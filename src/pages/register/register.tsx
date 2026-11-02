@@ -24,7 +24,7 @@ export const Register = (): React.JSX.Element => {
 
   return (
     <RegisterUI
-      errorText={error ?? underfined}
+      errorText={error ?? undefined}
       isLoading={isLoading}
       email={email}
       userName={userName}
