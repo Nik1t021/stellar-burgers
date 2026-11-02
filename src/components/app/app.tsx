@@ -12,7 +12,7 @@ import {
 } from '@pages';
 import { clsx } from 'clsx';
 import { useEffect } from 'react';
-import { Route, Routes, useLocation, useNavigate } from 'raect-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 import { fetchIngredients } from '@services/slices/ingredientsSlice';
 import { checkAuth } from '@services/slices/userSlice';
@@ -47,7 +47,7 @@ const App = (): React.JSX.Element => {
     <div className={styles.app}>
       <AppHeader />
       <Routes location={background ?? location}>
-        <Route path="/" element={ConstructorPage />} />
+        <Route path="/" element={<ConstructorPage />} />
         <Route path="/feed" element={<Feed />} />
         <Route
         path="/ingredients/:id"
@@ -72,7 +72,7 @@ const App = (): React.JSX.Element => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={ResetPassword />} /> 
+        <Route path="/reset-password" element={<ResetPassword />} /> 
         </Route>
       <Route element={<ProtectedRoute />}>
         <Route path="/profile" element={<Profile />} />

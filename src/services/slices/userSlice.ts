@@ -6,7 +6,7 @@ import {
     updateUserApi,
     refreshToken,
 } from '@api';
-import { createAsyncThunk, createSlice, isAnyof } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 import { deleteCookie, getCookie, setCookie } from '@utils/cookie';
 
@@ -21,11 +21,11 @@ export type UserState = {
     error: string | null;
 };
 const initialState: UserState = {
-    user: null;
-    isAuthChecked: false;
-    isChecking: false;
-    isLoading: false;
-    error: null;
+    user: null,
+    isAuthChecked: false,
+    isChecking: false,
+    isLoading: false,
+    error: null,
 };
 const clearTokens = (): void => {
     deleteCookie('accessToken');
@@ -33,7 +33,7 @@ const clearTokens = (): void => {
 };
 const saveTokens = (data: { accessToken: string; refreshToken: string }): void => {
     setCookie('accessToken', data.accessToken);
-    localStorage.setItem('refreshTiken', data.refreshToken);
+    localStorage.setItem('refreshToken', data.refreshToken);
 };
 export const checkAuth = createAsyncThunk(
     'user/checkAuth',
@@ -56,8 +56,10 @@ export const checkAuth = createAsyncThunk(
         },
     }
 );
-const canRequest = (_: unknown, { getState: () => unknow }): boolean =>
-    !(getState() as { user: UserState }).user.isLoading;
+const canRequest = (
+  _: unknown,
+  { getState }: { getState: () => unknown }
+): boolean => !(getState() as { user: UserState }).user.isLoading;
 
 export const loginUser = createAsyncThunk(
     'user/login',
@@ -111,7 +113,7 @@ const userSlice = createSlice({
             .addCase(checkAuth.fulfilled, (state, action) => {
                 state.user = action.payload;
                 state.isChecking = false;
-                state.isAuthChecked = true;
+                .addCase(checkAuth.rejected, (state) => {
             })
             .addCase(checkAuth.reject, (state) => {
                 state.user = null;
@@ -123,8 +125,8 @@ const userSlice = createSlice({
                 state.isLoading = false;
                 state.isAuthChecked = true;
             })
-            .addMtcher(
-                isAnyof(
+            .addMatcher(
+                isAnyOf(
                     loginUser.pending,
                     registerUser.pending,
                     updateUser.pending,
@@ -136,7 +138,7 @@ const userSlice = createSlice({
                 }
             )
             .addMatcher(
-                isAnyof(loginUser.fulfilled, registerUser.fulfilled, updateUser.fulfilled),
+                isAnyOf(loginUser.fulfilled, registerUser.fulfilled, updateUser.fulfilled),
                 (state, action) => {
                     state.user = action.payload;
                     state.isLoading = false;
@@ -144,11 +146,11 @@ const userSlice = createSlice({
                 }
             )
             .addMatcher(
-                isAnyof(
-                    loginUser.reject,
-                    registerUser.reject,
-                    updateUser.reject,
-                    logoutUser.reject
+               isAnyOf(
+                    loginUser.rejected,
+                    registerUser.rejected,
+                    updateUser.rejected,
+                    logoutUser.rejected
                 ),
                 (state, action) => {
                     state.isLoading = false;
