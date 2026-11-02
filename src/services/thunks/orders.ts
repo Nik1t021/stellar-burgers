@@ -1,4 +1,5 @@
 import { fetchFeed, fetchHistory } from '../slices/feedSlice';
+
 import type { AppDispatch } from '../store';
 export const ORDERS_REFRESH_INTERVAL = 5000;
 // Повторяем HTTP-запрос после завершения предыдущего, без пересечений.

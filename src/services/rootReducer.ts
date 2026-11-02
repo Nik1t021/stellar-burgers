@@ -15,4 +15,3 @@ export const rootReducer = combineReducers({
   order: orderReducer,
   orders: ordersReducer,
 });
-

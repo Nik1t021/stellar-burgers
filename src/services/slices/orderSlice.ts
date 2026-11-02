@@ -1,8 +1,10 @@
 import { orderBurgerApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import { clearConstructor } from './constructorSlice';
 import { fetchFeed, fetchHistory } from './feedSlice';
 import { logoutUser } from './userSlice';
+
 import type { TOrder } from '@utils-types';
 export type OrderState = {
   isLoading: boolean;

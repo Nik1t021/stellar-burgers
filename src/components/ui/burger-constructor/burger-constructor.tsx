@@ -63,7 +63,7 @@ export const BurgerConstructorUI = ({
       )}
     </ul>
     {constructorItems.bun ? (
-       <div className={clsx(styles.element, 'mt-4 mr-4')}>
+      <div className={clsx(styles.element, 'mt-4 mr-4')}>
         <ConstructorElement
           type="bottom"
           isLocked
@@ -83,7 +83,7 @@ export const BurgerConstructorUI = ({
         Выберите булки
       </div>
     )}
-     <div className={clsx(styles.total, 'mt-10 mr-4')}>
+    <div className={clsx(styles.total, 'mt-10 mr-4')}>
       <div className={clsx(styles.cost, 'mr-10')}>
         <p className={clsx('text', styles.text, 'mr-2')}>{price}</p>
         <CurrencyIcon type="primary" />

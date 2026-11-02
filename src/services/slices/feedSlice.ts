@@ -1,6 +1,8 @@
 import { getFeedsApi, getOrdersApi, getOrderByNumberApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import { logoutUser } from './userSlice';
+
 import type { TFeedState, TOrder } from '@utils-types';
 const initialFeed: TFeedState = {
   orders: [],

@@ -31,11 +31,11 @@ export const AppHeaderUI = ({ userName }: TAppHeaderUIProps): React.JSX.Element 
             <p className="text text_type_main-default ml-2 mr-10">Конструктор</p>
           </Link>
           <NavLink
-          to="/feed"
-          className={clsx(styles.link, { [styles.link_active]: isFeed })}
+            to="/feed"
+            className={clsx(styles.link, { [styles.link_active]: isFeed })}
           >
-          <ListIcon type={isFeed ? 'primary' : 'secondary'} />
-          <p className="text text_type_main-default ml-2">Лента заказов</p>
+            <ListIcon type={isFeed ? 'primary' : 'secondary'} />
+            <p className="text text_type_main-default ml-2">Лента заказов</p>
           </NavLink>
         </div>
         <Link to="/" className={styles.logo} aria-label="На главную">

@@ -60,7 +60,7 @@ export const OrderCardUI = memo(function OrderCardUI({
                   alt={ingredient.name}
                 />
                 {maxIngredients === index + 1 ? (
-                   <span
+                  <span
                     className={clsx('text text_type_digits-default', styles.remains)}
                   >
                     {orderInfo.remains > 0 ? `+${orderInfo.remains}` : null}

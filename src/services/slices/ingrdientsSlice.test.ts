@@ -1,7 +1,9 @@
 import { getIngredientsApi } from '@api';
 import { configureStore } from '@reduxjs/toolkit';
+
 import { rootReducer } from '../rootReducer';
 import { fetchIngredients } from './ingredientsSlice';
+
 import type { TIngredient } from '@utils-types';
 jest.mock('@api', () => ({ getIngredientsApi: jest.fn() }));
 const getIngredientsMock = jest.mocked(getIngredientsApi);

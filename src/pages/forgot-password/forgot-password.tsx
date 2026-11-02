@@ -1,13 +1,13 @@
+import { selectPassword } from '@/services/selectors';
+import { useDispatch, useSelector } from '@/services/store';
 import { ForgotPasswordUI } from '@ui-pages';
 import { useState, useEffect, type SyntheticEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { selectPassword } from '@/services/selectors';
 import {
   requestPasswordReset,
   clearPasswordError,
 } from '@services/slices/passwordSlice';
-import { useDispatch, useSelector } from '@/services/store';
 
 export const ForgotPassword = (): React.JSX.Element => {
   const [email, setEmail] = useState('');

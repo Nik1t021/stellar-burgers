@@ -1,10 +1,9 @@
-import { ResetPasswordUI } from '@ui-pages';
-import { type SyntheticEvent, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
 import { selectPassword } from '@/services/selectors';
 import { resetPassword, clearPasswordError } from '@/services/slices/passwordSlice';
 import { useDispatch, useSelector } from '@/services/store';
+import { ResetPasswordUI } from '@ui-pages';
+import { type SyntheticEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const ResetPassword = (): React.JSX.Element => {
   const navigate = useNavigate();
@@ -23,7 +22,7 @@ export const ResetPassword = (): React.JSX.Element => {
     void dispatch(resetPassword({ password, token }))
       .unwrap()
       .then(() => {
-        void navigate('/login', {replace: true });
+        void navigate('/login', { replace: true });
       })
       .catch(() => {
         /* Ошибка запроса отображается из Redux. */

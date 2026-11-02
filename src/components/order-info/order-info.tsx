@@ -25,7 +25,7 @@ export const OrderInfo = (): React.JSX.Element => {
   useEffect(() => {
     if (isValidNumber) void dispatch(fetchOrder(orderNumber));
   }, [dispatch, orderNumber, isValidNumber]);
-  
+
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;

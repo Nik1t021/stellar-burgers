@@ -1,17 +1,17 @@
+import { loginUser, clearUserError } from '@/services/slices/userSlice';
+import { useDispatch, useSelector } from '@/services/store';
 import { LoginUI } from '@ui-pages';
 import { useEffect } from 'react';
 import { type SyntheticEvent, useState } from 'react';
 
 import { selectUser } from '@services/selectors';
-import { loginUser, clearUserError } from '@/services/slices/userSlice';
-import { useDispatch, useSelector } from '@/services/store';
 
 export const Login = (): React.JSX.Element => {
   const dispatch = useDispatch();
   const { error, isLoading } = useSelector(selectUser);
   useEffect(() => {
-  dispatch(clearUserError());
-}, [dispatch]);
+    dispatch(clearUserError());
+  }, [dispatch]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

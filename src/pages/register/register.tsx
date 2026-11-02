@@ -1,10 +1,10 @@
+import { registerUser, clearUserError } from '@/services/slices/userSlice';
+import { useDispatch, useSelector } from '@/services/store';
 import { RegisterUI } from '@ui-pages';
 import { useEffect } from 'react';
 import { type SyntheticEvent, useState } from 'react';
 
 import { selectUser } from '@services/selectors';
-import { registerUser, clearUserError } from '@/services/slices/userSlice';
-import { useDispatch, useSelector } from '@/services/store';
 
 export const Register = (): React.JSX.Element => {
   const dispatch = useDispatch();

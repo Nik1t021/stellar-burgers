@@ -72,14 +72,14 @@ export const BurgerIngredients = (): React.JSX.Element => {
     return (
       <div role="alert">
         <p className="text text_type_main-default">{error}</p>
-        <button 
-        type="button"
-        onClick={() => {
-          void dispatch(fetchIngredients());
-        }}
-      >
-        Повторить загрузку
-      </button>
+        <button
+          type="button"
+          onClick={() => {
+            void dispatch(fetchIngredients());
+          }}
+        >
+          Повторить загрузку
+        </button>
       </div>
     );
   }
@@ -87,7 +87,7 @@ export const BurgerIngredients = (): React.JSX.Element => {
   if (!ingredients.length) {
     return <p className="text text_type_main-default">Нет ингредиентов</p>;
   }
-  
+
   return (
     <BurgerIngredientsUI
       currentTab={currentTab}
