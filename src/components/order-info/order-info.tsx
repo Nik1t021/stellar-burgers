@@ -2,7 +2,7 @@ import { Preloader, OrderInfoUI } from '@ui';
 import { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { selectOrderDetail } from '@services/selectors';
+import { selectOrderByNumber, selectOrderDetail } from '@services/selectors';
 import {
   selectIngredients,
   selectIngredientsError,
@@ -18,13 +18,16 @@ export const OrderInfo = (): React.JSX.Element => {
   const { number } = useParams<{ number: string }>();
   const orderNumber = Number(number);
   const isValidNumber = Number.isInteger(orderNumber) && orderNumber > 0;
-  const { order: orderData, error } = useSelector(selectOrderDetail);
+  const { error } = useSelector(selectOrderDetail);
+  const orderData = useSelector((state) => selectOrderByNumber(state, orderNumber));
   const ingredients = useSelector(selectIngredients);
   const ingredientsStatus = useSelector(selectIngredientsStatus);
   const ingredientsError = useSelector(selectIngredientsError);
   useEffect(() => {
-    if (isValidNumber) void dispatch(fetchOrder(orderNumber));
-  }, [dispatch, orderNumber, isValidNumber]);
+    if (isValidNumber && !orderData) {
+      void dispatch(fetchOrder(orderNumber));
+    }
+  }, [dispatch, orderNumber, isValidNumber, orderData]);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
@@ -68,7 +71,7 @@ export const OrderInfo = (): React.JSX.Element => {
 
   if (!isValidNumber) return <p>Некорректный номер заказа</p>;
   if (ingredientsStatus === 'failed') return <p role="alert">{ingredientsError}</p>;
-  if (error) return <p role="alert">{error}</p>;
+  if (error && !orderData) return <p role="alert">{error}</p>;
   if (!orderInfo || orderInfo.number !== orderNumber) {
     return <Preloader />;
   }
