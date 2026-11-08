@@ -18,9 +18,7 @@ export const ProtectedRoute = ({
     return <Navigate to="/login" replace state={{ from: location }} />;
   if (onlyUnAuth && user) {
     const from = (location.state as AuthLocationState | null)?.from;
-    return (
-      <Navigate to={from ? `${from.pathname}${from.search}${from.hash}` : '/'} replace />
-    );
+    return <Navigate to={from ?? '/'} replace />;
   }
   return <Outlet />;
 };
