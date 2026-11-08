@@ -2,7 +2,6 @@ import { orderBurgerApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { clearConstructor } from './constructorSlice';
-import { fetchFeed, fetchHistory } from './feedSlice';
 import { logoutUser } from './userSlice';
 
 import type { TOrder } from '@utils-types';
@@ -25,8 +24,6 @@ export const createOrder = createAsyncThunk(
     if ((getState() as { order: OrderState }).order.requestId !== requestId)
       return data.order;
     dispatch(clearConstructor());
-    void dispatch(fetchFeed());
-    void dispatch(fetchHistory());
     return data.order;
   },
   {
