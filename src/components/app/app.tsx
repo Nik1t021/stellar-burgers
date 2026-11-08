@@ -29,15 +29,15 @@ import styles from './app.module.css';
 type ModalLocationState = { background?: Location };
 
 const App = (): React.JSX.Element => {
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const background = (location.state as ModalLocationState | null)?.background;
 
   useEffect(() => {
-    void dispath(fetchIngredients());
-    void dispath(checkAuth());
-  }, [dispath]);
+    void dispatch(fetchIngredients());
+    void dispatch(checkAuth());
+  }, [dispatch]);
 
   const closeModal = (): void => {
     void navigate(-1);
