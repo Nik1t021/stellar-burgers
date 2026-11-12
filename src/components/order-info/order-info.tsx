@@ -1,21 +1,33 @@
 import { Preloader, OrderInfoUI } from '@ui';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { selectOrderByNumber, selectOrderDetail } from '@services/selectors';
+import {
+  selectIngredients,
+  selectIngredientsError,
+  selectIngredientsStatus,
+} from '@services/selectors/ingredients';
+import { fetchOrder } from '@services/slices/feedSlice';
+import { useDispatch, useSelector } from '@services/store';
 
 import type { TIngredient } from '@utils-types';
 
 export const OrderInfo = (): React.JSX.Element => {
-  /** TODO: взять переменные orderData и ingredients из стора */
-  const orderData = {
-    createdAt: '',
-    ingredients: [],
-    _id: '',
-    status: '',
-    name: '',
-    updatedAt: 'string',
-    number: 0,
-  };
-
-  const ingredients: TIngredient[] = [];
+  const dispatch = useDispatch();
+  const { number } = useParams<{ number: string }>();
+  const orderNumber = Number(number);
+  const isValidNumber = Number.isInteger(orderNumber) && orderNumber > 0;
+  const { error } = useSelector(selectOrderDetail);
+  const orderData = useSelector((state) => selectOrderByNumber(state, orderNumber));
+  const ingredients = useSelector(selectIngredients);
+  const ingredientsStatus = useSelector(selectIngredientsStatus);
+  const ingredientsError = useSelector(selectIngredientsError);
+  useEffect(() => {
+    if (isValidNumber && !orderData) {
+      void dispatch(fetchOrder(orderNumber));
+    }
+  }, [dispatch, orderNumber, isValidNumber, orderData]);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
@@ -57,7 +69,10 @@ export const OrderInfo = (): React.JSX.Element => {
     };
   }, [orderData, ingredients]);
 
-  if (!orderInfo) {
+  if (!isValidNumber) return <p>Некорректный номер заказа</p>;
+  if (ingredientsStatus === 'failed') return <p role="alert">{ingredientsError}</p>;
+  if (error && !orderData) return <p role="alert">{error}</p>;
+  if (!orderInfo || orderInfo.number !== orderNumber) {
     return <Preloader />;
   }
 
