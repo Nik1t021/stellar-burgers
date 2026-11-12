@@ -30,7 +30,7 @@ npm run build
 
 ```sh
 npx playwright install chromium
-npx run e2e
+npm run e2e
 ```
 
 В приложении доступны конструктор, лента, регистрация, вход,

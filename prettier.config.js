@@ -1,6 +1,6 @@
 /* @type {import("prettier").Config} */
 const config = {
-  endOfLine: 'lf',
+  endOfLine: 'auto',
   jsxSingleQuote: false,
   printWidth: 89,
   semi: true,
@@ -11,3 +11,5 @@ const config = {
 };
 
 export default config;
+
+
